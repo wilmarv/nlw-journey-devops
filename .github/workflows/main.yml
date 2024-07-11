@@ -30,7 +30,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./
-          file: ./app-journey
+          file: ./app-journey/Dockerfile
           push: true
           tags: |
             wilmarv/nlw.journey.api:${{ steps.generate_sha.outputs.sha }}
