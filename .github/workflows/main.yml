@@ -25,9 +25,12 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Build docker image
-        run: docker build -t wilmarv/nlw.journey.api:${{ steps.generate_sha.outputs.sha }} ./
-
-      - name: Push image to DockerHub
-        run: docker push wilmarv/nlw.journey.api:${{ steps.generate_sha.outputs.sha }}
+      
+      - name: Build and Push
+        uses: docker/build-and-push@v6
+        with:
+          context: ./
+          push: true
+          tags: |
+            wilmarv/nlw.journey.api:${{ steps.generate_sha.outputs.sha }}
+            wilmarv/nlw.journey.api:latest
